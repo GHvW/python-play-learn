@@ -1,5 +1,6 @@
 from typing import List, Union, TypeVar, Generator, Callable, Iterable
 from functools import reduce, partial
+from itertools import accumulate
 
 # basic function & typing
 def add(x: int, y: int) -> int:
@@ -64,6 +65,28 @@ def loopyrange(start: int, end: int) -> Generator[int, None, None]:
             yield add10(it)
 
 print(list(loopyrange(10, 20)))
+
+
+# conditional expression (ternary like functionality)
+x = 40
+cond_one = "less than 50" if x < 50 else "greater than or equal to 50"
+cond_two = "less than 20" if x < 20 else "less than 30" if x < 30 else "greater than 29"
+
+print(cond_one)
+print(cond_two)
+
+
+# itertools accumulate (like scan in Rx, rust, etc)
+def accumulate_add10s(acc: int, next: int) -> int:
+    return acc + add10(next)
+
+
+acc_result: List[int] = list(accumulate([10, 20, 30], accumulate_add10s, initial=0))
+
+athing = list(accumulate([1,2,3], initial=0))
+
+print(acc_result)
+
 
 # tree, functionaly, union typing, Generic types, recursive Type
 # more on types in pylance https://devblogs.microsoft.com/python/pylance-introduces-five-new-features-that-enable-type-magic-for-python-developers/
