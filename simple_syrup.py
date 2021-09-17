@@ -1,4 +1,4 @@
-from typing import List, Union, TypeVar, Generator, Callable, Iterable
+from typing import List, Union, TypeVar, Generator, Callable, Iterable, Tuple
 from functools import reduce, partial
 from itertools import accumulate
 
@@ -16,6 +16,10 @@ it = add(*nums)
 
 print(it) # 110
 print(add(10, 200)) # 210
+
+# list apply
+other_nums = [10, 100]
+print(add(*other_nums))
 
 
 # typing types (List here), functools reduce
@@ -96,10 +100,10 @@ print(acc_result)
 # both together does not seem to be
 A = TypeVar("A")
 
-Tree = Union[tuple[A, "Tree", "Tree"], A]
+Tree = Union[Tuple[A, "Tree", "Tree"], A]
 
 # ConsList = Union[tuple[A, "ConsList"], None]
-ConsList = Union[tuple[int, "ConsList"], None]
+ConsList = Union[Tuple[int, "ConsList"], None]
 # first: ConsList[int] = (100, None)
 # clist: ConsList[int] = (10, first)
 first: ConsList = (100, None)
