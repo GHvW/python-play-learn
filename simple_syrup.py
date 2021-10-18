@@ -71,6 +71,13 @@ def loopyrange(start: int, end: int) -> Generator[int, None, None]:
 print(list(loopyrange(10, 20)))
 
 
+# own higherorder and immediately invoke
+def higherorder(it: Callable[[int, int], int]) -> Callable[[int], int]:
+    return lambda x: it(x, 100)
+
+print(higherorder(lambda x, y: x + y)(100000))
+
+
 # conditional expression (ternary like functionality)
 x = 40
 cond_one = "less than 50" if x < 50 else "greater than or equal to 50"
