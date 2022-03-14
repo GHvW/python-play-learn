@@ -121,3 +121,17 @@ clist: ConsList = (10, first)
 #     # return 10 # works
 #     return (10, 1, 20)
     # return identity((10, (5, (3, 1, 2), (2, 1, 4)), (15, (14, 14, 12), (11, 18, 19))))
+
+# class IPoint(Protocol):
+#     def x(self) -> int:
+#         pass
+
+#     def y(self) -> int:
+#         pass
+
+
+# def private(x: int, y: int) -> IPoint:
+#     return dict(
+#         x=lambda: x,
+#         y=lambda: y
+#     )
