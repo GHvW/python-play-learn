@@ -1,4 +1,4 @@
-from typing import List, Union, TypeVar, Generator, Callable, Iterable, Tuple
+from typing import List, Union, Generator, Callable, Iterable, Tuple
 from functools import reduce, partial
 from itertools import accumulate
 
@@ -98,11 +98,11 @@ print(acc_result)
 # recursive types are ok
 # generics are ok
 # both together does not seem to be
-A = TypeVar("A")
 
-Tree = Union[Tuple[A, "Tree", "Tree"], A]
+# This requires python 3.12
+type Tree[A] = Tuple[A, Tree, Tree] | A
 
-# ConsList = Union[tuple[A, "ConsList"], None]
+# this is the old way of doing it pre python 3.12
 ConsList = Union[Tuple[int, "ConsList"], None]
 # first: ConsList[int] = (100, None)
 # clist: ConsList[int] = (10, first)
@@ -114,3 +114,23 @@ clist: ConsList = (10, first)
 #     # return 10 # works
 #     return (10, 1, 20)
     # return identity((10, (5, (3, 1, 2), (2, 1, 4)), (15, (14, 14, 12), (11, 18, 19))))
+
+
+class Vector:
+
+    def __init__(self, x: float, y: float) -> None:
+        self.x = x
+        self.y = y
+
+    def __str__(self) -> str:
+        return f"Vector(x: {self.x}, y: {self.y})"
+        
+
+    def scale(self, by: float) -> "Vector":
+        return Vector(self.x * by, self.y * by)
+
+
+vecs = list(it.scale(5) for it in [Vector(0, 0), Vector(1, 1), Vector(1, 2), Vector(3.30, 3.08)])
+
+print(vecs[1])
+    
