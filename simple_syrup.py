@@ -71,6 +71,13 @@ def loopyrange(start: int, end: int) -> Generator[int, None, None]:
 print(list(loopyrange(10, 20)))
 
 
+# own higherorder and immediately invoke
+def higherorder(it: Callable[[int, int], int]) -> Callable[[int], int]:
+    return lambda x: it(x, 100)
+
+print(higherorder(lambda x, y: x + y)(100000))
+
+
 # conditional expression (ternary like functionality)
 x = 40
 cond_one = "less than 50" if x < 50 else "greater than or equal to 50"
@@ -115,6 +122,19 @@ clist: ConsList = (10, first)
 #     return (10, 1, 20)
     # return identity((10, (5, (3, 1, 2), (2, 1, 4)), (15, (14, 14, 12), (11, 18, 19))))
 
+# class IPoint(Protocol):
+#     def x(self) -> int:
+#         pass
+
+#     def y(self) -> int:
+#         pass
+
+
+# def private(x: int, y: int) -> IPoint:
+#     return dict(
+#         x=lambda: x,
+#         y=lambda: y
+#     )
 
 class Vector:
 

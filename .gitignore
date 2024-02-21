@@ -3,3 +3,5 @@
 .vscode
 .ionide
 .metals
+
+__pycache__
